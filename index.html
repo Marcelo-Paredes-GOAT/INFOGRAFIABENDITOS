@@ -1,0 +1,1413 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>WASIMASI – Taller 4.1 y 4.2 | Los Benditos</title>
+
+  <!-- Bootstrap 5 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <!-- Bootstrap Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet"/>
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet"/>
+
+  <style>
+    :root {
+      --azul-oscuro:   #0A2463;
+      --azul-medio:    #1E5BBA;
+      --azul-claro:    #3A7BD5;
+      --azul-suave:    #E8F1FB;
+      --blanco:        #FFFFFF;
+      --gris-claro:    #F4F7FC;
+      --gris-borde:    #D0DCEE;
+      --texto-oscuro:  #0D1B2A;
+      --texto-medio:   #3D5A80;
+      --code-bg:       #0D1B2A;
+    }
+
+    * { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--blanco);
+      color: var(--texto-oscuro);
+    }
+
+    /* ── NAVBAR ─────────────────────────────────────── */
+    .navbar {
+      background: var(--azul-oscuro);
+      border-bottom: 3px solid var(--azul-claro);
+      position: sticky;
+      top: 0;
+      z-index: 1050;
+    }
+    .navbar-brand {
+      font-weight: 900;
+      font-size: 1.3rem;
+      color: var(--blanco) !important;
+      letter-spacing: .04em;
+    }
+    .navbar-brand span { color: var(--azul-claro); }
+    .nav-link {
+      color: rgba(255,255,255,.8) !important;
+      font-weight: 500;
+      font-size: .9rem;
+      transition: color .2s;
+    }
+    .nav-link:hover, .nav-link.active { color: var(--blanco) !important; }
+    .nav-link .badge-hito {
+      background: var(--azul-claro);
+      color: #fff;
+      border-radius: 999px;
+      font-size: .7rem;
+      padding: 2px 8px;
+      margin-right: 4px;
+      font-weight: 700;
+    }
+
+    /* ── HERO / CARÁTULA ────────────────────────────── */
+    #inicio {
+      background: linear-gradient(135deg, var(--azul-oscuro) 0%, var(--azul-medio) 60%, var(--azul-claro) 100%);
+      color: var(--blanco);
+      padding: 80px 0 60px;
+      position: relative;
+      overflow: hidden;
+    }
+    #inicio::before {
+      content: '';
+      position: absolute;
+      top: -80px; right: -80px;
+      width: 400px; height: 400px;
+      background: rgba(255,255,255,.04);
+      border-radius: 50%;
+    }
+    .hero-eyebrow {
+      font-size: .75rem;
+      font-weight: 700;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--azul-claro);
+      background: rgba(255,255,255,.1);
+      display: inline-block;
+      padding: 4px 14px;
+      border-radius: 999px;
+      margin-bottom: 18px;
+    }
+    .hero-title {
+      font-size: clamp(2rem, 5vw, 3.4rem);
+      font-weight: 900;
+      line-height: 1.1;
+      letter-spacing: -.02em;
+    }
+    .hero-title span { color: var(--azul-claro); }
+    .hero-subtitle {
+      font-size: 1.05rem;
+      font-weight: 300;
+      color: rgba(255,255,255,.75);
+      margin-top: 10px;
+    }
+    .hero-meta {
+      margin-top: 30px;
+      font-size: .85rem;
+      color: rgba(255,255,255,.65);
+    }
+    .hero-meta strong { color: var(--blanco); }
+
+    /* ── TEAM CARDS ─────────────────────────────────── */
+    .team-section {
+      background: var(--gris-claro);
+      padding: 60px 0;
+      border-bottom: 1px solid var(--gris-borde);
+    }
+    .section-label {
+      font-size: .72rem;
+      font-weight: 700;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      color: var(--azul-medio);
+      margin-bottom: 6px;
+    }
+    .section-title {
+      font-size: 1.6rem;
+      font-weight: 800;
+      color: var(--azul-oscuro);
+    }
+    .team-card {
+      background: var(--blanco);
+      border: 1px solid var(--gris-borde);
+      border-radius: 14px;
+      padding: 22px 20px;
+      transition: transform .22s, box-shadow .22s;
+      cursor: default;
+    }
+    .team-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 32px rgba(10,36,99,.12);
+    }
+    .team-avatar {
+      width: 52px; height: 52px;
+      background: var(--azul-suave);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.4rem;
+      font-weight: 900;
+      color: var(--azul-oscuro);
+      margin-bottom: 12px;
+    }
+    .team-name { font-weight: 700; font-size: .95rem; color: var(--texto-oscuro); }
+    .team-dni  { font-size: .78rem; color: var(--texto-medio); }
+    .team-badge-100 {
+      background: #d1fae5; color: #065f46;
+      border-radius: 999px; font-size: .7rem;
+      font-weight: 700; padding: 2px 10px;
+      display: inline-block; margin-top: 8px;
+    }
+    .team-badge-0 {
+      background: #fee2e2; color: #991b1b;
+      border-radius: 999px; font-size: .7rem;
+      font-weight: 700; padding: 2px 10px;
+      display: inline-block; margin-top: 8px;
+    }
+
+    /* ── HITO SECTIONS ──────────────────────────────── */
+    .hito-section {
+      padding: 72px 0;
+      border-bottom: 1px solid var(--gris-borde);
+    }
+    .hito-section:nth-child(even) { background: var(--gris-claro); }
+    .hito-number {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .78rem;
+      font-weight: 700;
+      color: var(--azul-claro);
+      background: var(--azul-suave);
+      border: 1px solid var(--gris-borde);
+      display: inline-block;
+      padding: 3px 12px;
+      border-radius: 6px;
+      margin-bottom: 10px;
+      letter-spacing: .06em;
+    }
+    .hito-title {
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--azul-oscuro);
+      margin-bottom: 8px;
+    }
+    .hito-lead {
+      font-size: 1rem;
+      color: var(--texto-medio);
+      max-width: 640px;
+      line-height: 1.65;
+    }
+
+    /* ── PROMPT CARDS ───────────────────────────────── */
+    .prompt-card {
+      background: var(--blanco);
+      border: 1px solid var(--gris-borde);
+      border-left: 4px solid var(--azul-claro);
+      border-radius: 10px;
+      padding: 20px 22px;
+      margin-bottom: 16px;
+      transition: box-shadow .2s;
+    }
+    .prompt-card:hover { box-shadow: 0 6px 24px rgba(10,36,99,.09); }
+    .prompt-number {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .72rem;
+      font-weight: 700;
+      color: var(--azul-claro);
+      margin-bottom: 6px;
+    }
+    .prompt-title { font-weight: 700; font-size: .95rem; color: var(--azul-oscuro); margin-bottom: 8px; }
+    .prompt-text  { font-size: .88rem; color: var(--texto-medio); line-height: 1.6; }
+
+    /* ── CODE BLOCKS ────────────────────────────────── */
+    .code-block {
+      background: var(--code-bg);
+      color: #a8d8ff;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .78rem;
+      line-height: 1.65;
+      border-radius: 10px;
+      padding: 22px 20px;
+      overflow-x: auto;
+      margin: 16px 0;
+      position: relative;
+    }
+    .code-label {
+      position: absolute;
+      top: 10px; right: 14px;
+      font-size: .65rem;
+      font-weight: 700;
+      letter-spacing: .1em;
+      color: rgba(255,255,255,.35);
+      text-transform: uppercase;
+    }
+    .code-block .kw  { color: #79b8ff; }
+    .code-block .cm  { color: #6a737d; font-style: italic; }
+    .code-block .str { color: #9ecbff; }
+    .code-block .fn  { color: #b392f0; }
+
+    /* ── ARCH DIAGRAM ───────────────────────────────── */
+    .arch-box {
+      background: var(--blanco);
+      border: 1px solid var(--gris-borde);
+      border-radius: 12px;
+      padding: 18px 20px;
+    }
+    .arch-layer {
+      background: var(--azul-suave);
+      border: 1px solid var(--gris-borde);
+      border-radius: 8px;
+      padding: 12px 16px;
+      margin-bottom: 10px;
+      position: relative;
+    }
+    .arch-layer-title {
+      font-size: .72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .1em;
+      color: var(--azul-medio);
+      margin-bottom: 6px;
+    }
+    .arch-item {
+      display: inline-block;
+      background: var(--blanco);
+      border: 1px solid var(--gris-borde);
+      border-radius: 6px;
+      font-size: .78rem;
+      padding: 4px 10px;
+      margin: 3px 4px 3px 0;
+      color: var(--texto-oscuro);
+      font-family: 'JetBrains Mono', monospace;
+    }
+    .arch-arrow {
+      text-align: center;
+      color: var(--azul-claro);
+      font-size: 1.2rem;
+      margin: 4px 0;
+    }
+
+    /* ── FOLDER STRUCTURE ───────────────────────────── */
+    .folder-tree {
+      background: var(--code-bg);
+      border-radius: 10px;
+      padding: 20px 22px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .82rem;
+      color: #cdd9e5;
+      line-height: 2;
+    }
+    .folder-tree .dir  { color: #79b8ff; }
+    .folder-tree .file { color: #9ecbff; }
+    .folder-tree .ann  { color: #6a737d; font-size: .74rem; }
+
+    /* ── LECCIONES ──────────────────────────────────── */
+    .leccion-card {
+      border-radius: 12px;
+      padding: 24px 22px;
+      height: 100%;
+    }
+    .leccion-ok   { background: #eff9f4; border: 1px solid #6ee7b7; }
+    .leccion-fail { background: #fff5f5; border: 1px solid #fca5a5; }
+    .leccion-card h5 { font-weight: 700; font-size: 1rem; margin-bottom: 12px; }
+    .leccion-ok   h5 { color: #065f46; }
+    .leccion-fail h5 { color: #991b1b; }
+    .leccion-item {
+      display: flex; gap: 10px;
+      margin-bottom: 12px;
+      font-size: .88rem;
+      line-height: 1.55;
+    }
+    .leccion-icon { font-size: 1rem; flex-shrink: 0; margin-top: 1px; }
+
+    /* ── WASIBOT ────────────────────────────────────── */
+    .wasibot-card {
+      background: linear-gradient(135deg, var(--azul-oscuro), var(--azul-medio));
+      color: var(--blanco);
+      border-radius: 16px;
+      padding: 36px 32px;
+    }
+    .wasibot-card h3 { font-weight: 800; font-size: 1.5rem; }
+    .wasibot-badge {
+      background: rgba(255,255,255,.15);
+      border-radius: 999px;
+      font-size: .75rem;
+      font-weight: 700;
+      padding: 4px 14px;
+      display: inline-block;
+      margin-bottom: 16px;
+    }
+    .wasibot-prompt {
+      background: rgba(255,255,255,.1);
+      border-left: 3px solid rgba(255,255,255,.4);
+      border-radius: 6px;
+      padding: 14px 16px;
+      font-style: italic;
+      font-size: .88rem;
+      margin-top: 16px;
+      line-height: 1.6;
+    }
+
+    /* ── DB TABLE CARDS ─────────────────────────────── */
+    .db-card {
+      background: var(--blanco);
+      border: 1px solid var(--gris-borde);
+      border-top: 3px solid var(--azul-claro);
+      border-radius: 10px;
+      padding: 18px;
+      height: 100%;
+    }
+    .db-card h6 {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .85rem;
+      font-weight: 700;
+      color: var(--azul-oscuro);
+      margin-bottom: 10px;
+    }
+    .db-field {
+      display: flex; justify-content: space-between;
+      font-size: .78rem;
+      padding: 4px 0;
+      border-bottom: 1px dashed var(--gris-borde);
+      color: var(--texto-medio);
+    }
+    .db-field:last-child { border: none; }
+    .db-field .field-name { font-weight: 600; color: var(--texto-oscuro); }
+    .db-pk { color: #ca8a04; font-size: .65rem; font-weight: 700; margin-left: 4px; }
+    .db-fk { color: var(--azul-claro); font-size: .65rem; font-weight: 700; margin-left: 4px; }
+
+    /* ── MODAL TWEAKS ───────────────────────────────── */
+    .modal-header { background: var(--azul-oscuro); color: var(--blanco); }
+    .modal-title  { font-weight: 700; }
+    .btn-close-white { filter: invert(1); }
+
+    /* ── FOOTER ─────────────────────────────────────── */
+    footer {
+      background: var(--azul-oscuro);
+      color: rgba(255,255,255,.6);
+      font-size: .82rem;
+      padding: 28px 0;
+      text-align: center;
+    }
+    footer strong { color: var(--blanco); }
+
+    /* ── UTILITIES ──────────────────────────────────── */
+    .divider {
+      height: 2px;
+      background: linear-gradient(90deg, var(--azul-claro), transparent);
+      border: none;
+      margin: 28px 0;
+    }
+    .tag {
+      display: inline-block;
+      background: var(--azul-suave);
+      color: var(--azul-medio);
+      border-radius: 6px;
+      font-size: .75rem;
+      font-weight: 600;
+      padding: 3px 10px;
+      margin: 3px 3px 3px 0;
+    }
+
+    @media (max-width: 768px) {
+      .hito-title { font-size: 1.5rem; }
+      .hero-title { font-size: 2rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════
+     NAVBAR
+══════════════════════════════════════════ -->
+<nav class="navbar navbar-expand-lg">
+  <div class="container">
+    <a class="navbar-brand" href="#inicio">WASI<span>MASI</span></a>
+    <button class="navbar-toggler border-secondary" type="button"
+            data-bs-toggle="collapse" data-bs-target="#navMenu">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navMenu">
+      <ul class="navbar-nav ms-auto gap-1">
+        <li class="nav-item">
+          <a class="nav-link" href="#equipo"><i class="bi bi-people me-1"></i>Equipo</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#hito1">
+            <span class="badge-hito">H1</span>Arquitectura & Prompts
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#hito2">
+            <span class="badge-hito">H2</span>Código Fuente & BD
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#hito3">
+            <span class="badge-hito">H3</span>Lecciones Aprendidas
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- ══════════════════════════════════════════
+     HERO / CARÁTULA
+══════════════════════════════════════════ -->
+<section id="inicio">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-lg-8">
+        <div class="hero-eyebrow">Universidad Continental · Ingeniería de Sistemas</div>
+        <h1 class="hero-title">
+          Sistemas Tradicionales &<br>
+          <span>Desarrollo con Agentes de IA</span>
+        </h1>
+        <p class="hero-subtitle">
+          Construcción de Software · Taller 4.1 y 4.2 · NRC: 59118<br>
+          Docente: Ing. Hugo Espetia Huamanga
+        </p>
+        <div class="hero-meta mt-4">
+          <strong>Proyecto:</strong> WASIMASI – Ecosistema Digital de Mascotas &nbsp;·&nbsp;
+          <strong>Año:</strong> Cusco–Perú 2026
+        </div>
+        <div class="mt-4">
+          <a href="#hito1" class="btn btn-light btn-sm me-2 fw-600">
+            <i class="bi bi-arrow-down-circle me-1"></i>Ver Hitos
+          </a>
+          <a href="#equipo" class="btn btn-outline-light btn-sm">
+            <i class="bi bi-people me-1"></i>Ver Equipo
+          </a>
+        </div>
+      </div>
+      <div class="col-lg-4 text-center mt-4 mt-lg-0">
+        <div style="font-size:7rem; opacity:.18; line-height:1;">🐾</div>
+        <div style="font-size:.8rem; color:rgba(255,255,255,.4); margin-top:-10px; letter-spacing:.12em; text-transform:uppercase;">Los Benditos</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     EQUIPO
+══════════════════════════════════════════ -->
+<section id="equipo" class="team-section">
+  <div class="container">
+    <div class="mb-4">
+      <div class="section-label">Integrantes</div>
+      <div class="section-title">Equipo "Los Benditos"</div>
+    </div>
+    <div class="row g-3">
+
+      <!-- Callanaupa -->
+      <div class="col-md-6 col-lg-3">
+        <div class="team-card">
+          <div class="team-avatar">C</div>
+          <div class="team-name">Callanaupa Cjuiro<br>Manuel Fabrizio</div>
+          <div class="team-dni">DNI: 72945602</div>
+          <span class="team-badge-100">100% participación</span>
+        </div>
+      </div>
+
+      <!-- Jancco -->
+      <div class="col-md-6 col-lg-3">
+        <div class="team-card">
+          <div class="team-avatar">J</div>
+          <div class="team-name">Jancco Salas<br>Juan Sebastián</div>
+          <div class="team-dni">DNI: 75824307</div>
+          <span class="team-badge-100">100% participación</span>
+        </div>
+      </div>
+
+      <!-- Quispe -->
+      <div class="col-md-6 col-lg-3">
+        <div class="team-card">
+          <div class="team-avatar" style="background:#fee2e2; color:#991b1b;">Q</div>
+          <div class="team-name">Quispe Cruz<br>Joel Milton</div>
+          <div class="team-dni">DNI: 76879919</div>
+          <span class="team-badge-0">0% participación</span>
+        </div>
+      </div>
+
+      <!-- Paredes -->
+      <div class="col-md-6 col-lg-3">
+        <div class="team-card">
+          <div class="team-avatar">P</div>
+          <div class="team-name">Paredes Estrada<br>Marcelo Flavio</div>
+          <div class="team-dni">DNI: 72480974</div>
+          <span class="team-badge-100">100% participación</span>
+        </div>
+      </div>
+
+      <!-- Lerma -->
+      <div class="col-md-6 col-lg-3">
+        <div class="team-card">
+          <div class="team-avatar">L</div>
+          <div class="team-name">Lerma Condori<br>Antoni</div>
+          <div class="team-dni">DNI: 77840999</div>
+          <span class="team-badge-100">100% participación</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     CONTEXTO & DESAFÍO
+══════════════════════════════════════════ -->
+<section class="hito-section" style="background:var(--blanco);">
+  <div class="container">
+    <div class="row g-4">
+      <div class="col-lg-6">
+        <div class="hito-number">CONTEXTO</div>
+        <h2 class="hito-title">Contexto del Proyecto</h2>
+        <p class="hito-lead">
+          La administración moderna de las clínicas veterinarias exige la transición de
+          sistemas transaccionales pasivos a ecosistemas predictivos activos. Los registros
+          tradicionales no mitigan de forma proactiva problemáticas como el quiebre de stock
+          de medicamentos o la falta de seguimiento en tratamientos crónicos.
+        </p>
+        <p class="mt-3" style="font-size:.9rem; color:var(--texto-medio); line-height:1.7;">
+          Este proyecto implementa <strong>WASIMASI</strong>, cuyo valor diferencial radica en el
+          codiseño mediante <strong>Agentes de Inteligencia Artificial</strong>: un Agente Residente
+          capaz de auditar la base de datos de forma autónoma, procesar historiales médicos
+          y generar reportes predictivos directamente en el dashboard.
+        </p>
+      </div>
+      <div class="col-lg-6">
+        <div class="hito-number">DESAFÍO TECNOLÓGICO</div>
+        <h2 class="hito-title">Dos Dinámicas de IA</h2>
+        <div class="row g-3 mt-1">
+          <div class="col-12">
+            <div class="prompt-card">
+              <div class="prompt-title"><i class="bi bi-robot me-2 text-primary"></i>Agentes de Desarrollo</div>
+              <div class="prompt-text">
+                Configurados mediante <strong>Google AI Studio</strong> con System Prompts estructurados
+                para co-programar el esquema de la base de datos y los endpoints transaccionales del backend.
+              </div>
+            </div>
+          </div>
+          <div class="col-12">
+            <div class="prompt-card">
+              <div class="prompt-title"><i class="bi bi-cpu me-2 text-primary"></i>Agente Residente</div>
+              <div class="prompt-text">
+                Implementado en <code>residentAgent.js</code> (Node.js). Se ejecuta de forma autónoma
+                analizando series temporales de la base de datos e inyectando proyecciones de inventario
+                y métricas estadísticas en el dashboard.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     HITO 1
+══════════════════════════════════════════ -->
+<section id="hito1" class="hito-section">
+  <div class="container">
+    <div class="hito-number">HITO 1</div>
+    <h2 class="hito-title">Arquitectura & Bitácora de Prompts</h2>
+    <p class="hito-lead">
+      Estructura modular del backend y el registro completo de los 10 prompts que guiaron
+      el codiseño con la IA.
+    </p>
+    <hr class="divider">
+
+    <!-- Arquitectura -->
+    <h5 class="fw-700 mb-3" style="color:var(--azul-oscuro);">
+      <i class="bi bi-diagram-3 me-2"></i>3.1 Diagrama de Arquitectura
+    </h5>
+    <div class="row g-4 mb-5">
+      <div class="col-lg-5">
+        <div class="arch-box">
+          <div class="arch-layer" style="background:#e0e9ff;">
+            <div class="arch-layer-title">Capa de Presentación</div>
+            <span class="arch-item">React / Next.js</span>
+            <span class="arch-item">Dashboard de Clínica</span>
+          </div>
+          <div class="arch-arrow"><i class="bi bi-arrow-down"></i> Peticiones HTTP REST / JSON</div>
+          <div class="arch-layer">
+            <div class="arch-layer-title">Capa de Servidor: Node.js / Express</div>
+            <span class="arch-item">Rutas CRUD</span>
+            <span class="arch-item">Agente Residente</span>
+            <span class="arch-item">Worker Asíncrono</span>
+            <span class="arch-item">Kernel de IA · Regresión & R²</span>
+          </div>
+          <div class="arch-arrow"><i class="bi bi-arrow-down"></i> Consulta Drivers MySQL2</div>
+          <div class="arch-layer" style="background:#e0e9ff;">
+            <div class="arch-layer-title">Capa de Persistencia: MySQL InnoDB</div>
+            <span class="arch-item">Tablas Transaccionales</span>
+            <span class="arch-item">productos / movimientos_inventario</span>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-7">
+        <div class="folder-tree">
+          <div><span class="dir">wasimasi-backend/</span></div>
+          <div>&nbsp;&nbsp;<span class="dir">src/</span></div>
+          <div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="dir">agents/</span>&nbsp;&nbsp;<span class="ann">← residentAgent.js (cerebro IA + Gemini)</span></div>
+          <div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="dir">config/</span>&nbsp;&nbsp;<span class="ann">← Configuración segura MySQL</span></div>
+          <div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="dir">controllers/</span>&nbsp;&nbsp;<span class="ann">← Lógica de negocio (co-programada con IA)</span></div>
+          <div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="dir">routes/</span>&nbsp;&nbsp;<span class="ann">← API REST (puertas de acceso)</span></div>
+          <div>&nbsp;&nbsp;<span class="file">index.js</span>&nbsp;&nbsp;<span class="ann">← Servidor Express + sistemas de seguridad</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bitácora de Prompts -->
+    <h5 class="fw-700 mb-3" style="color:var(--azul-oscuro);">
+      <i class="bi bi-journal-code me-2"></i>3.2 Bitácora de Prompts
+    </h5>
+    <div class="row g-3">
+
+      <div class="col-md-6">
+        <div class="prompt-card" data-bs-toggle="modal" data-bs-target="#modal1" style="cursor:pointer;">
+          <div class="prompt-number">PROMPT 3.2.1</div>
+          <div class="prompt-title">Arquitectura de Conexión Base y Configuración del Servidor</div>
+          <div class="prompt-text">Migración de la interfaz estática de Wasimasi a XAMPP con PDO seguro hacia <code>db_renamascot</code>.</div>
+          <span class="tag mt-2">PHP</span><span class="tag">PDO</span><span class="tag">MySQL</span>
+          <div class="text-primary mt-2" style="font-size:.8rem;"><i class="bi bi-eye me-1"></i>Ver prompt completo</div>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="prompt-card" data-bs-toggle="modal" data-bs-target="#modal2" style="cursor:pointer;">
+          <div class="prompt-number">PROMPT 3.2.2</div>
+          <div class="prompt-title">Rutas Dinámicas para Paneles Clínicos</div>
+          <div class="prompt-text">Endpoint PHP con JOIN entre Mascotas y Usuarios. Frontend con <code>fetch()</code> dinámico.</div>
+          <span class="tag mt-2">JOIN</span><span class="tag">fetch()</span><span class="tag">DOM</span>
+          <div class="text-primary mt-2" style="font-size:.8rem;"><i class="bi bi-eye me-1"></i>Ver prompt completo</div>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="prompt-card" data-bs-toggle="modal" data-bs-target="#modal3" style="cursor:pointer;">
+          <div class="prompt-number">PROMPT 3.2.3</div>
+          <div class="prompt-title">Control de Trazabilidad y Bypass de Sesión</div>
+          <div class="prompt-text">Bypass temporal con <code>localStorage</code> y trazabilidad con <code>console.log()</code> estratégicos.</div>
+          <span class="tag mt-2">localStorage</span><span class="tag">Debug</span>
+          <div class="text-primary mt-2" style="font-size:.8rem;"><i class="bi bi-eye me-1"></i>Ver prompt completo</div>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="prompt-card" data-bs-toggle="modal" data-bs-target="#modal4" style="cursor:pointer;">
+          <div class="prompt-number">PROMPT 3.2.4</div>
+          <div class="prompt-title">Autenticación con Doble Rol (Dueño / Clínica)</div>
+          <div class="prompt-text">Motor de autenticación real con formulario unificado, verificación por DNI o RUC y redirección por rol.</div>
+          <span class="tag mt-2">Auth</span><span class="tag">JSON</span><span class="tag">Roles</span>
+          <div class="text-primary mt-2" style="font-size:.8rem;"><i class="bi bi-eye me-1"></i>Ver prompt completo</div>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="prompt-card" data-bs-toggle="modal" data-bs-target="#modal5" style="cursor:pointer;">
+          <div class="prompt-number">PROMPT 3.2.5</div>
+          <div class="prompt-title">Historial Clínico Universal y Plantillas Dinámicas</div>
+          <div class="prompt-text">Plantilla dinámica que lee <code>id_mascota</code> desde URL y devuelve historial cronológico.</div>
+          <span class="tag mt-2">Query Param</span><span class="tag">Historial</span>
+          <div class="text-primary mt-2" style="font-size:.8rem;"><i class="bi bi-eye me-1"></i>Ver prompt completo</div>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="prompt-card" data-bs-toggle="modal" data-bs-target="#modal6" style="cursor:pointer;">
+          <div class="prompt-number">PROMPT 3.2.6</div>
+          <div class="prompt-title">Persistencia de Nuevas Atenciones Médicas</div>
+          <div class="prompt-text">Formulario de atención conectado a BD real con <code>e.preventDefault()</code> y actualización sin recarga.</div>
+          <span class="tag mt-2">POST</span><span class="tag">preventDefault</span>
+          <div class="text-primary mt-2" style="font-size:.8rem;"><i class="bi bi-eye me-1"></i>Ver prompt completo</div>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="prompt-card border-danger" data-bs-toggle="modal" data-bs-target="#modal7" style="cursor:pointer; border-left-color:#ef4444 !important;">
+          <div class="prompt-number" style="color:#ef4444;">PROMPT 3.2.7 — 🔐 Vulnerabilidad Corregida</div>
+          <div class="prompt-title">Aislamiento y Privacidad de Datos del Propietario</div>
+          <div class="prompt-text">Se detectó que el dashboard exponía mascotas de todos los usuarios. Corregido con filtro <code>WHERE id_usuario</code>.</div>
+          <span class="tag mt-2" style="background:#fee2e2; color:#991b1b;">Bug de Privacidad</span><span class="tag">SQL Filter</span>
+          <div class="text-primary mt-2" style="font-size:.8rem;"><i class="bi bi-eye me-1"></i>Ver prompt completo</div>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="prompt-card" data-bs-toggle="modal" data-bs-target="#modal8" style="cursor:pointer;">
+          <div class="prompt-number">PROMPT 3.2.8</div>
+          <div class="prompt-title">KPIs y Estadísticas en Tiempo Real</div>
+          <div class="prompt-text">Endpoint con funciones SQL <code>COUNT</code> filtrando por <code>id_clinica</code> activa. Valores reales en el DOM.</div>
+          <span class="tag mt-2">KPIs</span><span class="tag">COUNT</span><span class="tag">Dashboard</span>
+          <div class="text-primary mt-2" style="font-size:.8rem;"><i class="bi bi-eye me-1"></i>Ver prompt completo</div>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="prompt-card border-warning" data-bs-toggle="modal" data-bs-target="#modal9" style="cursor:pointer; border-left-color:#f59e0b !important;">
+          <div class="prompt-number" style="color:#b45309;">PROMPT 3.2.9 — ⚠️ Bug Corregido</div>
+          <div class="prompt-title">Validación Cruzada para Múltiples Mascotas</div>
+          <div class="prompt-text">La IA seleccionaba solo la primera mascota. Corregido con <code>fetchAll()</code> y modal de selección manual.</div>
+          <span class="tag mt-2" style="background:#fef9c3; color:#854d0e;">Bug de Lógica</span><span class="tag">fetchAll()</span>
+          <div class="text-primary mt-2" style="font-size:.8rem;"><i class="bi bi-eye me-1"></i>Ver prompt completo</div>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="prompt-card" data-bs-toggle="modal" data-bs-target="#modal10" style="cursor:pointer;">
+          <div class="prompt-number">PROMPT 3.2.10</div>
+          <div class="prompt-title">Integración WasiBot con Bypass SSL</div>
+          <div class="prompt-text">Chatbot con <code>gemini-2.5-flash</code> vía cURL. <code>CURLOPT_SSL_VERIFYPEER=false</code> para entorno local XAMPP.</div>
+          <span class="tag mt-2">Gemini</span><span class="tag">cURL</span><span class="tag">SSL</span>
+          <div class="text-primary mt-2" style="font-size:.8rem;"><i class="bi bi-eye me-1"></i>Ver prompt completo</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     HITO 2
+══════════════════════════════════════════ -->
+<section id="hito2" class="hito-section" style="background:var(--blanco);">
+  <div class="container">
+    <div class="hito-number">HITO 2</div>
+    <h2 class="hito-title">Código Fuente & Base de Datos</h2>
+    <p class="hito-lead">
+      Implementación real del frontend (SPA), backend (Node.js/Express) y script de migración
+      optimizado por el equipo.
+    </p>
+    <hr class="divider">
+
+    <!-- Frontend -->
+    <h5 class="fw-700 mb-2" style="color:var(--azul-oscuro);">
+      <i class="bi bi-laptop me-2"></i>4.1.1 Frontend — index.html (Pantallas críticas)
+    </h5>
+    <p style="font-size:.88rem; color:var(--texto-medio); margin-bottom:12px;">
+      Login con segregación de roles y formulario de registro de atención médica.
+    </p>
+    <div class="code-block mb-4">
+      <span class="code-label">HTML</span>
+<pre style="margin:0; white-space:pre-wrap;">
+<span class="cm">&lt;!-- PANTALLA DE INICIO DE SESIÓN --&gt;</span>
+&lt;<span class="kw">form</span> id=<span class="str">"loginForm"</span> class=<span class="str">"login-form"</span>&gt;
+  &lt;<span class="kw">input</span> type=<span class="str">"text"</span> id=<span class="str">"loginDocumento"</span> placeholder=<span class="str">"DNI / RUC"</span> /&gt;
+  &lt;<span class="kw">input</span> type=<span class="str">"password"</span> id=<span class="str">"loginPassword"</span> /&gt;
+
+  <span class="cm">&lt;!-- Selector de Rol --&gt;</span>
+  &lt;<span class="kw">input</span> type=<span class="str">"radio"</span> name=<span class="str">"loginRol"</span> value=<span class="str">"dueno"</span> checked /&gt; Dueño
+  &lt;<span class="kw">input</span> type=<span class="str">"radio"</span> name=<span class="str">"loginRol"</span> value=<span class="str">"clinica"</span> /&gt; Clínica
+
+  &lt;<span class="kw">button</span> type=<span class="str">"submit"</span>&gt;Ingresar&lt;/<span class="kw">button</span>&gt;
+&lt;/<span class="kw">form</span>&gt;
+
+<span class="cm">&lt;!-- FORMULARIO DE NUEVA ATENCIÓN --&gt;</span>
+&lt;<span class="kw">form</span> id=<span class="str">"attentionForm"</span>&gt;
+  &lt;<span class="kw">select</span> id=<span class="str">"formMotivo"</span>&gt;Consulta General / Vacunación / Laboratorio&lt;/<span class="kw">select</span>&gt;
+  &lt;<span class="kw">textarea</span> id=<span class="str">"formDiagnostico"</span>&gt;&lt;/<span class="kw">textarea</span>&gt;
+  &lt;<span class="kw">textarea</span> id=<span class="str">"formEvolucion"</span>&gt;&lt;/<span class="kw">textarea</span>&gt;
+  &lt;<span class="kw">textarea</span> id=<span class="str">"formMedicacion"</span>&gt;&lt;/<span class="kw">textarea</span>&gt;
+  &lt;<span class="kw">button</span> type=<span class="str">"submit"</span>&gt;Finalizar y Guardar Registro&lt;/<span class="kw">button</span>&gt;
+&lt;/<span class="kw">form</span>&gt;
+</pre>
+    </div>
+
+    <h5 class="fw-700 mb-2" style="color:var(--azul-oscuro);">
+      <i class="bi bi-braces me-2"></i>4.1.2 Controlador SPA — app.js
+    </h5>
+    <div class="code-block mb-4">
+      <span class="code-label">JavaScript</span>
+<pre style="margin:0; white-space:pre-wrap;">
+<span class="cm">// 1. Gestión de pantallas SPA</span>
+<span class="kw">function</span> <span class="fn">showScreen</span>(screenId) {
+  document.<span class="fn">querySelectorAll</span>(<span class="str">'.screen'</span>).<span class="fn">forEach</span>(s => s.classList.<span class="fn">remove</span>(<span class="str">'active'</span>));
+  document.<span class="fn">getElementById</span>(screenId).classList.<span class="fn">add</span>(<span class="str">'active'</span>);
+}
+
+<span class="cm">// 2. Submit asíncrono del formulario de atención</span>
+document.<span class="fn">getElementById</span>(<span class="str">'attentionForm'</span>).<span class="fn">addEventListener</span>(<span class="str">'submit'</span>, <span class="kw">async</span> (e) => {
+  e.<span class="fn">preventDefault</span>();
+  submitBtn.disabled = <span class="kw">true</span>;
+
+  <span class="kw">const</span> attentionData = {
+    idMascota: document.<span class="fn">getElementById</span>(<span class="str">'formIdMascota'</span>).value,
+    motivo:    document.<span class="fn">getElementById</span>(<span class="str">'formMotivo'</span>).value,
+    diagnostico: document.<span class="fn">getElementById</span>(<span class="str">'formDiagnostico'</span>).value,
+    medicacion:  document.<span class="fn">getElementById</span>(<span class="str">'formMedicacion'</span>).value
+  };
+
+  <span class="kw">try</span> {
+    <span class="kw">const</span> res = <span class="kw">await</span> <span class="fn">fetch</span>(<span class="str">'/api/atenciones/registrar'</span>, {
+      method: <span class="str">'POST'</span>,
+      headers: { <span class="str">'Content-Type'</span>: <span class="str">'application/json'</span> },
+      body: JSON.<span class="fn">stringify</span>(attentionData)
+    });
+    <span class="kw">const</span> result = <span class="kw">await</span> res.<span class="fn">json</span>();
+    <span class="kw">if</span> (result.success) <span class="fn">showScreen</span>(<span class="str">'screen-clinic-panel'</span>);
+  } <span class="kw">catch</span> (err) {
+    alert(<span class="str">`Error: ${err.message}`</span>);
+  } <span class="kw">finally</span> {
+    submitBtn.disabled = <span class="kw">false</span>;
+  }
+});
+</pre>
+    </div>
+
+    <h5 class="fw-700 mb-2" style="color:var(--azul-oscuro);">
+      <i class="bi bi-server me-2"></i>4.1.2 Backend — Node.js / Express
+    </h5>
+    <div class="code-block mb-5">
+      <span class="code-label">Node.js</span>
+<pre style="margin:0; white-space:pre-wrap;">
+<span class="cm">// 1. Control de Acceso y Autenticación (api/login.php)</span>
+app.<span class="fn">post</span>(<span class="str">'/api/login.php'</span>, (req, res) => {
+  <span class="kw">const</span> { documento, password, rol } = req.body;
+  <span class="kw">if</span> (!documento || !password || !rol)
+    <span class="kw">return</span> res.<span class="fn">status</span>(400).<span class="fn">json</span>({ success: <span class="kw">false</span>, error: <span class="str">'Campos incompletos'</span> });
+
+  <span class="cm">// En producción: SELECT * FROM usuarios WHERE documento = ? + bcrypt.compare()</span>
+  res.<span class="fn">json</span>({ success: <span class="kw">true</span>, id_usuario: rol === <span class="str">'dueno'</span> ? 101 : 501, rol });
+});
+
+<span class="cm">// 2. Consolidación del Historial Clínico Completo</span>
+app.<span class="fn">get</span>(<span class="str">'/api/get_historial_completo.php'</span>, (req, res) => {
+  <span class="kw">const</span> idMascota = req.query.id_mascota;
+  <span class="kw">if</span> (!idMascota)
+    <span class="kw">return</span> res.<span class="fn">status</span>(400).<span class="fn">json</span>({ success: <span class="kw">false</span>, error: <span class="str">'ID requerido'</span> });
+
+  <span class="cm">// En producción: JOIN mascotas + historial_clinico ORDER BY fecha_atencion DESC</span>
+  res.<span class="fn">json</span>({ mascota: { nombre: <span class="str">'Firulais'</span>, ... }, historial: [...] });
+});
+</pre>
+    </div>
+
+    <!-- BD Tables -->
+    <h5 class="fw-700 mb-3" style="color:var(--azul-oscuro);">
+      <i class="bi bi-database me-2"></i>4.2 Script de Migración — db_renamascot
+    </h5>
+    <p style="font-size:.88rem; color:var(--texto-medio); margin-bottom:16px;">
+      Generado por IA y optimizado por el equipo. 5 tablas + Seed Data incluida.
+    </p>
+    <div class="row g-3 mb-4">
+
+      <div class="col-md-6 col-lg-4">
+        <div class="db-card">
+          <h6><i class="bi bi-person me-1"></i>Usuarios</h6>
+          <div class="db-field"><span class="field-name">id_usuario<span class="db-pk">PK</span></span><span>INT</span></div>
+          <div class="db-field"><span class="field-name">dni</span><span>VARCHAR(8) UNIQUE</span></div>
+          <div class="db-field"><span class="field-name">nombres</span><span>VARCHAR(100)</span></div>
+          <div class="db-field"><span class="field-name">apellidos</span><span>VARCHAR(100)</span></div>
+          <div class="db-field"><span class="field-name">correo</span><span>VARCHAR(150) UNIQUE</span></div>
+          <div class="db-field"><span class="field-name">contrasena_hash</span><span>VARCHAR(255)</span></div>
+          <div class="db-field"><span class="field-name">telefono</span><span>VARCHAR(15)</span></div>
+          <div class="db-field"><span class="field-name">fecha_registro</span><span>TIMESTAMP</span></div>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-lg-4">
+        <div class="db-card">
+          <h6><i class="bi bi-hospital me-1"></i>Clinicas</h6>
+          <div class="db-field"><span class="field-name">id_clinica<span class="db-pk">PK</span></span><span>INT</span></div>
+          <div class="db-field"><span class="field-name">ruc</span><span>VARCHAR(11) UNIQUE</span></div>
+          <div class="db-field"><span class="field-name">nombre_comercial</span><span>VARCHAR(150)</span></div>
+          <div class="db-field"><span class="field-name">correo</span><span>VARCHAR(150) UNIQUE</span></div>
+          <div class="db-field"><span class="field-name">contrasena_hash</span><span>VARCHAR(255)</span></div>
+          <div class="db-field"><span class="field-name">telefono</span><span>VARCHAR(15)</span></div>
+          <div class="db-field"><span class="field-name">direccion</span><span>VARCHAR(255)</span></div>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-lg-4">
+        <div class="db-card">
+          <h6><i class="bi bi-heart me-1"></i>Mascotas</h6>
+          <div class="db-field"><span class="field-name">id_mascota<span class="db-pk">PK</span></span><span>INT</span></div>
+          <div class="db-field"><span class="field-name">id_usuario<span class="db-fk">FK</span></span><span>INT</span></div>
+          <div class="db-field"><span class="field-name">nombre</span><span>VARCHAR(100)</span></div>
+          <div class="db-field"><span class="field-name">especie</span><span>VARCHAR(50)</span></div>
+          <div class="db-field"><span class="field-name">raza</span><span>VARCHAR(100)</span></div>
+          <div class="db-field"><span class="field-name">sexo</span><span>ENUM(Macho/Hembra)</span></div>
+          <div class="db-field"><span class="field-name">codigo_dni</span><span>VARCHAR(12) UNIQUE</span></div>
+          <div class="db-field"><span class="field-name">estado</span><span>ENUM(Activo/Perdido/Fallecido)</span></div>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-lg-4">
+        <div class="db-card">
+          <h6><i class="bi bi-file-medical me-1"></i>Historial_Clinico</h6>
+          <div class="db-field"><span class="field-name">id_registro<span class="db-pk">PK</span></span><span>INT</span></div>
+          <div class="db-field"><span class="field-name">id_mascota<span class="db-fk">FK</span></span><span>INT</span></div>
+          <div class="db-field"><span class="field-name">id_clinica<span class="db-fk">FK</span></span><span>INT</span></div>
+          <div class="db-field"><span class="field-name">nombre_doctor</span><span>VARCHAR(150)</span></div>
+          <div class="db-field"><span class="field-name">motivo_consulta</span><span>VARCHAR(255)</span></div>
+          <div class="db-field"><span class="field-name">diagnostico</span><span>TEXT</span></div>
+          <div class="db-field"><span class="field-name">receta_conclusion</span><span>TEXT</span></div>
+          <div class="db-field"><span class="field-name">fecha_atencion</span><span>TIMESTAMP</span></div>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-lg-4">
+        <div class="db-card">
+          <h6><i class="bi bi-shield-plus me-1"></i>Carnet_Vacunacion</h6>
+          <div class="db-field"><span class="field-name">id_vacuna<span class="db-pk">PK</span></span><span>INT</span></div>
+          <div class="db-field"><span class="field-name">id_mascota<span class="db-fk">FK</span></span><span>INT</span></div>
+          <div class="db-field"><span class="field-name">id_clinica<span class="db-fk">FK</span></span><span>INT</span></div>
+          <div class="db-field"><span class="field-name">nombre_vacuna</span><span>VARCHAR(100)</span></div>
+          <div class="db-field"><span class="field-name">fecha_aplicacion</span><span>DATE</span></div>
+          <div class="db-field"><span class="field-name">proxima_dosis</span><span>DATE</span></div>
+          <div class="db-field"><span class="field-name">sello_veterinario</span><span>VARCHAR(255)</span></div>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-lg-4">
+        <div class="db-card" style="border-top-color:#6ee7b7;">
+          <h6 style="color:#065f46;"><i class="bi bi-box-seam me-1"></i>Seed Data Incluida</h6>
+          <div class="db-field"><span class="field-name">Usuarios</span><span>3 registros</span></div>
+          <div class="db-field"><span class="field-name">Clínicas</span><span>3 registros (Cusco)</span></div>
+          <div class="db-field"><span class="field-name">Mascotas</span><span>8 registros</span></div>
+          <div class="db-field"><span class="field-name">Historial</span><span>3 eventos</span></div>
+          <div class="db-field"><span class="field-name">Vacunas</span><span>3 carnets</span></div>
+          <div class="db-field"><span class="field-name">Engine</span><span>InnoDB · utf8mb4</span></div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- WasiBot -->
+    <h5 class="fw-700 mb-3" style="color:var(--azul-oscuro);">
+      <i class="bi bi-chat-dots me-2"></i>4.3 Funcionalidad Agéntica — WasiBot
+    </h5>
+    <div class="wasibot-card">
+      <div class="row align-items-center">
+        <div class="col-lg-7">
+          <span class="wasibot-badge"><i class="bi bi-robot me-1"></i>gemini-2.5-flash · Google Gemini API</span>
+          <h3>WasiBot</h3>
+          <p style="color:rgba(255,255,255,.75); font-size:.92rem; line-height:1.65;">
+            Agente residente inteligente integrado de forma nativa (sin Dialogflow). Opera con un
+            <strong>System Prompt inyectado desde el backend</strong> en cada petición, impidiendo
+            que la IA alucine o desvíe la conversación fuera del dominio veterinario.
+          </p>
+          <div class="wasibot-prompt">
+            "Eres WasiBot, el asistente virtual experto del ecosistema digital Wasimasi.
+            Ayudas a dueños y clínicas veterinarias a usar la plataforma. Eres amable,
+            breve y das instrucciones claras. Conoces sobre registrar mascotas, ver
+            historiales y subir atenciones."
+          </div>
+        </div>
+        <div class="col-lg-5 mt-4 mt-lg-0">
+          <div style="background:rgba(255,255,255,.08); border-radius:12px; padding:16px;">
+            <div class="d-flex align-items-center gap-2 mb-3">
+              <i class="bi bi-circle-fill text-success" style="font-size:.6rem;"></i>
+              <span style="font-size:.85rem; font-weight:600;">Arquitectura del Módulo</span>
+            </div>
+            <div class="d-flex flex-column gap-2">
+              <div style="background:rgba(255,255,255,.1); border-radius:6px; padding:10px 12px; font-size:.82rem;">
+                <strong>Frontend (Widget UI)</strong><br>
+                <span style="color:rgba(255,255,255,.65);">Vanilla JS + HTML + CSS · Historial en tiempo real</span>
+              </div>
+              <div style="background:rgba(255,255,255,.1); border-radius:6px; padding:10px 12px; font-size:.82rem;">
+                <strong>Backend (Bridge API)</strong><br>
+                <span style="color:rgba(255,255,255,.65);">api/chatbot.php · cURL · JSON payload</span>
+              </div>
+              <div style="background:rgba(255,255,255,.1); border-radius:6px; padding:10px 12px; font-size:.82rem;">
+                <strong>Nota de entorno</strong><br>
+                <span style="color:rgba(255,255,255,.65);"><code>CURLOPT_SSL_VERIFYPEER=false</code> para XAMPP local</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     HITO 3 — LECCIONES APRENDIDAS
+══════════════════════════════════════════ -->
+<section id="hito3" class="hito-section">
+  <div class="container">
+    <div class="hito-number">HITO 3</div>
+    <h2 class="hito-title">Lecciones Aprendidas</h2>
+    <p class="hito-lead">
+      Qué resolvió la IA de forma brillante y en qué falló — y cómo el equipo lo solucionó.
+    </p>
+    <hr class="divider">
+
+    <div class="row g-4">
+
+      <!-- ACIERTOS -->
+      <div class="col-lg-6">
+        <div class="leccion-card leccion-ok">
+          <h5><i class="bi bi-check-circle me-2"></i>Lo que la IA resolvió brillantemente</h5>
+
+          <div class="leccion-item">
+            <span class="leccion-icon">✅</span>
+            <div>
+              <strong>Generación del esquema de BD:</strong> A partir del contexto del proyecto,
+              la IA co-programó el script de migración completo con 5 tablas, relaciones, tipos
+              de dato y datos semilla, que el equipo luego optimizó.
+            </div>
+          </div>
+
+          <div class="leccion-item">
+            <span class="leccion-icon">✅</span>
+            <div>
+              <strong>Los 10 endpoints del backend:</strong> Siguiendo prompts muy específicos
+              (documentados en la Bitácora), la IA generó cada endpoint resolviendo un problema
+              concreto de forma iterativa.
+            </div>
+          </div>
+
+          <div class="leccion-item">
+            <span class="leccion-icon">✅</span>
+            <div>
+              <strong>Implementación de WasiBot:</strong> La IA definió el patrón del
+              System Prompt inyectado en cada petición, manteniendo al agente enfocado
+              en el dominio veterinario sin necesitar memoria persistente.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- FALLOS -->
+      <div class="col-lg-6">
+        <div class="leccion-card leccion-fail">
+          <h5><i class="bi bi-x-circle me-2"></i>Dónde falló y cómo lo resolvieron</h5>
+
+          <div class="leccion-item">
+            <span class="leccion-icon">🔴</span>
+            <div>
+              <strong>Vulnerabilidad de privacidad (Prompt 3.2.7):</strong> El dashboard del
+              dueño exponía las mascotas de <em>todos</em> los usuarios. La IA no lo detectó.
+              El equipo lo corrigió manualmente agregando <code>WHERE id_usuario = :id_usuario</code>
+              con parámetros preparados (PDO).
+            </div>
+          </div>
+
+          <div class="leccion-item">
+            <span class="leccion-icon">🟡</span>
+            <div>
+              <strong>Selección de múltiples mascotas (Prompt 3.2.9):</strong> Cuando un
+              propietario tenía varias mascotas, el sistema seleccionaba automáticamente la
+              primera. El equipo intervino cambiando la lógica a <code>fetchAll()</code> con
+              modal de selección manual.
+            </div>
+          </div>
+
+          <div class="leccion-item">
+            <span class="leccion-icon">🟠</span>
+            <div>
+              <strong>Limitaciones del entorno local (Prompt 3.2.10):</strong> La IA no
+              contempló las restricciones de XAMPP. Fue necesario agregar
+              <code>CURLOPT_SSL_VERIFYPEER=false</code> para que WasiBot pudiera conectarse
+              con la API de Gemini. Solución solo para entorno de desarrollo.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Conclusión -->
+      <div class="col-12">
+        <div style="background:var(--azul-suave); border:1px solid var(--gris-borde); border-radius:12px; padding:24px 28px;">
+          <h6 style="color:var(--azul-oscuro); font-weight:700; margin-bottom:8px;">
+            <i class="bi bi-lightbulb me-2 text-warning"></i>Conclusión del Proceso
+          </h6>
+          <p style="font-size:.92rem; color:var(--texto-medio); margin:0; line-height:1.7;">
+            La IA aceleró significativamente el desarrollo, especialmente en estructura y boilerplate,
+            pero requirió <strong>supervisión constante del equipo</strong> para corregir errores de
+            lógica de negocio y seguridad que ella no anticipó. El mayor valor no estuvo en confiar
+            ciegamente en el código generado, sino en usar los prompts como una
+            <strong>bitácora de decisiones técnicas</strong> que permitió iterar rápidamente sobre
+            una base sólida.
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     FOOTER
+══════════════════════════════════════════ -->
+<footer>
+  <div class="container">
+    <strong>WASIMASI</strong> — Ecosistema Digital de Mascotas<br>
+    Construcción de Software · NRC: 59118 · Docente: Ing. Hugo Espetia Huamanga<br>
+    <span style="color:rgba(255,255,255,.4);">Universidad Continental · Cusco–Perú 2026 · Equipo Los Benditos</span>
+  </div>
+</footer>
+
+<!-- ══════════════════════════════════════════
+     MODALES DE PROMPTS
+══════════════════════════════════════════ -->
+
+<!-- Modal 1 -->
+<div class="modal fade" id="modal1" tabindex="-1">
+  <div class="modal-dialog modal-lg"><div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title">3.2.1 — Arquitectura de Conexión Base</h5>
+      <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+    </div>
+    <div class="modal-body">
+      <div class="tag mb-3">PHP</div><div class="tag mb-3">PDO</div><div class="tag mb-3">MySQL</div>
+      <p style="font-size:.9rem; line-height:1.7; color:var(--texto-medio);">
+        <strong>Prompt enviado a la IA:</strong><br>
+        "Necesito migrar la interfaz estática exportada del ecosistema digital Wasimasi hacia un entorno dinámico
+        local corriendo en XAMPP. Genera el archivo central de conexión <code>conexion.php</code> utilizando PDO
+        para conectarse de forma segura a una base de datos MySQL llamada <code>db_renamascot</code>. Asegúrate
+        de habilitar el manejo de excepciones (<code>PDO::ATTR_ERRMODE</code>) para capturar fallos de red de inmediato."
+      </p>
+      <div style="background:var(--gris-claro); border-radius:8px; padding:14px; font-size:.85rem; color:var(--texto-medio);">
+        <strong>Resultado:</strong> La IA generó el archivo de conexión con PDO, manejo de excepciones y configuración
+        de charset utf8mb4. Primer paso del stack backend.
+      </div>
+    </div>
+  </div></div>
+</div>
+
+<!-- Modal 2 -->
+<div class="modal fade" id="modal2" tabindex="-1">
+  <div class="modal-dialog modal-lg"><div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title">3.2.2 — Rutas Dinámicas para Paneles Clínicos</h5>
+      <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+    </div>
+    <div class="modal-body">
+      <div class="tag mb-3">JOIN SQL</div><div class="tag mb-3">fetch()</div><div class="tag mb-3">DOM dinámico</div>
+      <p style="font-size:.9rem; line-height:1.7; color:var(--texto-medio);">
+        <strong>Prompt enviado a la IA:</strong><br>
+        "La vista del Panel de Control de la clínica es completamente estática y muestra datos fijos de pacientes
+        simulados. Crea un endpoint en PHP (<code>api/get_pacientes_clinica.php</code>) que realice un JOIN entre
+        las tablas Mascotas y Usuarios. Modifica el frontend en JavaScript para realizar una petición asíncrona
+        <code>fetch()</code> que limpie las filas duras del HTML y renderice dinámicamente los pacientes reales."
+      </p>
+    </div>
+  </div></div>
+</div>
+
+<!-- Modal 3 -->
+<div class="modal fade" id="modal3" tabindex="-1">
+  <div class="modal-dialog modal-lg"><div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title">3.2.3 — Trazabilidad y Bypass de Sesión</h5>
+      <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+    </div>
+    <div class="modal-body">
+      <div class="tag mb-3">localStorage</div><div class="tag mb-3">Debug</div><div class="tag mb-3">console.log</div>
+      <p style="font-size:.9rem; line-height:1.7; color:var(--texto-medio);">
+        <strong>Prompt enviado a la IA:</strong><br>
+        "Para agilizar las pruebas del dashboard del dueño sin pasar constantemente por el flujo completo, modifica
+        <code>app.js</code> agregando un bypass temporal mediante <code>localStorage.getItem('id_usuario') || 1</code>.
+        Añade trazabilidad rigurosa colocando <code>console.log()</code> estratégicos antes de disparar el fetch y
+        capturando los errores en el bloque <code>.catch()</code>."
+      </p>
+    </div>
+  </div></div>
+</div>
+
+<!-- Modal 4 -->
+<div class="modal fade" id="modal4" tabindex="-1">
+  <div class="modal-dialog modal-lg"><div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title">3.2.4 — Autenticación con Doble Rol</h5>
+      <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+    </div>
+    <div class="modal-body">
+      <div class="tag mb-3">Auth</div><div class="tag mb-3">DNI / RUC</div><div class="tag mb-3">Roles</div>
+      <p style="font-size:.9rem; line-height:1.7; color:var(--texto-medio);">
+        <strong>Prompt enviado a la IA:</strong><br>
+        "Elimina los bypasses de desarrollo y construye el motor de autenticación real. Diseña un formulario unificado
+        en <code>index.html</code> que capture credenciales y un selector de rol ('dueno' o 'clinica'). Crea el backend
+        seguro <code>api/login.php</code> que verifique la existencia del DNI en la tabla Usuarios o el RUC en la tabla
+        Clinicas. Si la consulta es exitosa, retornar un JSON con los datos de identidad para guardar en localStorage
+        y redirigir al panel correspondiente."
+      </p>
+    </div>
+  </div></div>
+</div>
+
+<!-- Modal 5 -->
+<div class="modal fade" id="modal5" tabindex="-1">
+  <div class="modal-dialog modal-lg"><div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title">3.2.5 — Historial Clínico Universal</h5>
+      <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+    </div>
+    <div class="modal-body">
+      <div class="tag mb-3">Query Param</div><div class="tag mb-3">Historial</div><div class="tag mb-3">Cronológico</div>
+      <p style="font-size:.9rem; line-height:1.7; color:var(--texto-medio);">
+        <strong>Prompt enviado a la IA:</strong><br>
+        "El acceso al historial médico redirige a una interfaz universal con datos fijos de un solo paciente simulado.
+        Transforma esta vista en una plantilla dinámica reutilizable. Configura el JavaScript para leer el <code>id_mascota</code>
+        activo desde la URL (<code>?id_mascota=X</code>) o el almacenamiento local. Crea el endpoint
+        <code>api/get_historial_completo.php</code> que devuelva un arreglo ordenado cronológicamente."
+      </p>
+    </div>
+  </div></div>
+</div>
+
+<!-- Modal 6 -->
+<div class="modal fade" id="modal6" tabindex="-1">
+  <div class="modal-dialog modal-lg"><div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title">3.2.6 — Persistencia de Nuevas Atenciones Médicas</h5>
+      <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+    </div>
+    <div class="modal-body">
+      <div class="tag mb-3">POST</div><div class="tag mb-3">preventDefault</div><div class="tag mb-3">Sin recarga</div>
+      <p style="font-size:.9rem; line-height:1.7; color:var(--texto-medio);">
+        <strong>Prompt enviado a la IA:</strong><br>
+        "Conecta el formulario de 'Nueva Atención Médica' con la base de datos real. Crea el archivo
+        <code>api/guardar_historial.php</code> para procesar peticiones POST con los campos de motivo, diagnóstico
+        clínico y medicación recetada. El frontend debe manipular el evento submit con <code>e.preventDefault()</code>,
+        envíe los datos al backend y, tras confirmar éxito, limpie el formulario y actualice la línea de tiempo
+        sin refrescar toda la página."
+      </p>
+    </div>
+  </div></div>
+</div>
+
+<!-- Modal 7 -->
+<div class="modal fade" id="modal7" tabindex="-1">
+  <div class="modal-dialog modal-lg"><div class="modal-content">
+    <div class="modal-header" style="background:#991b1b;">
+      <h5 class="modal-title">3.2.7 — 🔐 Vulnerabilidad de Privacidad Corregida</h5>
+      <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+    </div>
+    <div class="modal-body">
+      <div class="tag mb-3" style="background:#fee2e2; color:#991b1b;">Bug de Privacidad</div><div class="tag mb-3">SQL Filter</div>
+      <p style="font-size:.9rem; line-height:1.7; color:var(--texto-medio);">
+        <strong>Problema detectado por el equipo (no por la IA):</strong><br>
+        El dashboard del dueño exponía las mascotas de <em>todos</em> los usuarios del sistema.
+      </p>
+      <p style="font-size:.9rem; line-height:1.7; color:var(--texto-medio);">
+        <strong>Prompt de corrección:</strong><br>
+        "Se ha detectado una vulnerabilidad de privacidad. Modifica el archivo backend
+        <code>api/get_mascotas.php</code> para exigir estrictamente un parámetro <code>$_GET['id_usuario']</code>.
+        Restringe la consulta SQL empleando una cláusula <code>WHERE id_usuario = :id_usuario</code> para asegurar
+        que un cliente autenticado solo tenga visibilidad sobre sus propios animales."
+      </p>
+      <div style="background:#fff5f5; border:1px solid #fca5a5; border-radius:8px; padding:14px; font-size:.85rem; color:#991b1b;">
+        <strong>Lección:</strong> La IA generó el endpoint sin contemplar el filtro por usuario. Fue el equipo quien
+        identificó la vulnerabilidad y solicitó la corrección.
+      </div>
+    </div>
+  </div></div>
+</div>
+
+<!-- Modal 8 -->
+<div class="modal fade" id="modal8" tabindex="-1">
+  <div class="modal-dialog modal-lg"><div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title">3.2.8 — KPIs y Estadísticas en Tiempo Real</h5>
+      <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+    </div>
+    <div class="modal-body">
+      <div class="tag mb-3">KPIs</div><div class="tag mb-3">COUNT SQL</div><div class="tag mb-3">Dashboard</div>
+      <p style="font-size:.9rem; line-height:1.7; color:var(--texto-medio);">
+        <strong>Prompt enviado a la IA:</strong><br>
+        "Los contadores del panel administrativo (Pacientes Activos, Vacunas Hoy, Informes Clínicos) muestran valores
+        fijos heredados del diseño original. Desarrolla el endpoint <code>api/get_estadisticas_clinica.php</code>
+        que consuma funciones de agregación SQL (<code>COUNT</code>) filtrando por el <code>id_clinica</code> de la
+        sesión activa. Actualiza el frontend para inyectar estos valores reales en el DOM."
+      </p>
+    </div>
+  </div></div>
+</div>
+
+<!-- Modal 9 -->
+<div class="modal fade" id="modal9" tabindex="-1">
+  <div class="modal-dialog modal-lg"><div class="modal-content">
+    <div class="modal-header" style="background:#92400e;">
+      <h5 class="modal-title">3.2.9 — ⚠️ Bug de Lógica Corregido</h5>
+      <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+    </div>
+    <div class="modal-body">
+      <div class="tag mb-3" style="background:#fef9c3; color:#854d0e;">Bug de Lógica</div><div class="tag mb-3">fetchAll()</div>
+      <p style="font-size:.9rem; line-height:1.7; color:var(--texto-medio);">
+        <strong>Problema detectado por el equipo:</strong><br>
+        Cuando una clínica buscaba registrar atención para un cliente con múltiples mascotas, el sistema seleccionaba
+        automáticamente la primera, impidiendo elegir al paciente correcto.
+      </p>
+      <p style="font-size:.9rem; line-height:1.7; color:var(--texto-medio);">
+        <strong>Prompt de corrección:</strong><br>
+        "Modifica la lógica del backend <code>api/buscar_paciente_global.php</code> para realizar un
+        <code>fetchAll()</code> que retorne la lista completa de animales asociados al DNI del propietario.
+        Si se detectan múltiples registros, el frontend debe desplegar un listado interactivo en el modal
+        para que el médico seleccione manualmente al paciente."
+      </p>
+    </div>
+  </div></div>
+</div>
+
+<!-- Modal 10 -->
+<div class="modal fade" id="modal10" tabindex="-1">
+  <div class="modal-dialog modal-lg"><div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title">3.2.10 — WasiBot con Bypass SSL</h5>
+      <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+    </div>
+    <div class="modal-body">
+      <div class="tag mb-3">Gemini 2.5 Flash</div><div class="tag mb-3">cURL</div><div class="tag mb-3">SSL</div>
+      <p style="font-size:.9rem; line-height:1.7; color:var(--texto-medio);">
+        <strong>Prompt enviado a la IA:</strong><br>
+        "Construye la infraestructura para un Chatbot inteligente embebido. Crea el archivo <code>api/chatbot.php</code>
+        encargado de empaquetar los mensajes del usuario y transmitirlos mediante cURL hacia la API de Google Gemini
+        utilizando el modelo <code>gemini-2.5-flash</code>. Configura las directrices del sistema
+        (<code>systemInstruction</code>) para definir el rol de soporte experto. Añade obligatoriamente
+        <code>CURLOPT_SSL_VERIFYPEER => false</code> para prevenir bloqueos de certificados SSL en XAMPP."
+      </p>
+      <div style="background:#fffbeb; border:1px solid #fcd34d; border-radius:8px; padding:14px; font-size:.85rem; color:#92400e;">
+        <strong>Nota:</strong> El <code>CURLOPT_SSL_VERIFYPEER=false</code> es solo para desarrollo local.
+        En producción debe reactivarse la verificación SSL.
+      </div>
+    </div>
+  </div></div>
+</div>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+  // Active nav link on scroll
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.nav-link');
+
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(s => {
+      if (window.scrollY >= s.offsetTop - 100) current = s.id;
+    });
+    navLinks.forEach(l => {
+      l.classList.remove('active');
+      if (l.getAttribute('href') === '#' + current) l.classList.add('active');
+    });
+  });
+
+  // Animate cards on scroll
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.style.opacity = '1';
+        e.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.team-card, .prompt-card, .db-card, .leccion-card').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(20px)';
+    el.style.transition = 'opacity .4s ease, transform .4s ease';
+    observer.observe(el);
+  });
+</script>
+
+</body>
+</html>
